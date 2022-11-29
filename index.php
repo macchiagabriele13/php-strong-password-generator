@@ -7,9 +7,25 @@ L’esercizio è suddiviso in varie milestone ed è molto importante svilupparle
 Creare un form che invii in GET la lunghezza della password. Una nostra funzione utilizzerà questo dato per generare una password casuale (composta da lettere, lettere maiuscole, numeri e simboli) da restituire all’utente. Scriviamo tutto (logica e layout) in un unico file index.php */
 
 
-$length_number = $_GET["lenght_psw"] ?? "";
-var_dump($length_number)
+$lenght_number = $_GET["lenght_psw"] ?? "";
+var_dump($length_number);
 
+if ( $lenght_number >= 1 ) {
+    function generatePassword($lunghezza) {
+
+        $caratteri = 'abcdefghijklmnopqrstuxyvwzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,;:!?.$/*-+&@_+';
+        $password = '';
+
+        for ($i = 0; $i < $lunghezza; $i++) {
+            $random = rand(0, strlen($caratteri) - 1);
+            $password .= substr($caratteri, $random, 1);
+      }
+
+      return $password;
+    }
+} else {
+    echo 'Inserisci il tuo numero per la tua password';
+}
 
 
 ?>
@@ -46,7 +62,7 @@ var_dump($length_number)
 
 <div class="password text-center">
       <h2>La tua password</h2>
-      <h3><strong><?= generatePassword($pswLength) ?></strong></h3>
+      <h3><strong><?= generatePassword($lenght_number) ?></strong></h3>
  </div>
 
     <div class="form-check form-check-inline">
